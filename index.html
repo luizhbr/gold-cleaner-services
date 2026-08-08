@@ -3,646 +3,1008 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#fafafa">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="GoldCleaner">
   <meta name="description" content="Gold Cleaner Services — Premium residential and commercial cleaning. Book online in seconds.">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/icons/icon-192.png">
   <title>Gold Cleaner Services — Premium Cleaning</title>
 
-  <!-- Fonts: Inter (closest free substitute to SF Pro) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* === DESIGN TOKENS (Apple-inspired + Gold brand) === */
+    /* === DESIGN TOKENS — Instagram-inspired + Gold brand === */
     :root {
-      /* Colors — Binary light/dark rhythm */
-      --pure-black: #000000;
-      --dark-bg: #0a0a0a;
-      --light-bg: #f5f5f7;
-      --near-black: #1d1d1f;
-      --white: #ffffff;
+      /* IG base palette */
+      --ig-bg: #fafafa;
+      --ig-white: #ffffff;
+      --ig-border: #dbdbdb;
+      --ig-text: #262626;
+      --ig-text-secondary: #8e8e8e;
+      --ig-blue: #0095f6;
+      --ig-blue-hover: #1877f2;
 
-      /* Brand accent: Gold */
-      --gold: #d4af37;
-      --gold-light: #e8c861;
-      --gold-dark: #b8941f;
+      /* Gold brand gradient (Instagram-style gradient ring) */
+      --gold-1: #f9d976;
+      --gold-2: #e8b339;
+      --gold-3: #d4af37;
+      --gold-4: #b8941f;
+      --gold-gradient: linear-gradient(45deg, #f9d976, #e8b339, #d4af37, #b8941f);
 
-      /* Interactive */
-      --link: #0071e3;
-      --link-dark: #2997ff;
-
-      /* Text */
-      --text-primary: #1d1d1f;
-      --text-secondary: rgba(0,0,0,0.72);
-      --text-tertiary: rgba(0,0,0,0.48);
-      --text-on-dark: #ffffff;
-      --text-on-dark-secondary: rgba(255,255,255,0.72);
+      /* IG gradient (for accents) */
+      --ig-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 
       /* Surfaces */
-      --surface-dark-1: #1c1c1e;
-      --surface-dark-2: #242426;
-      --surface-light: #ffffff;
+      --surface-card: #ffffff;
+      --surface-story: #fafafa;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
 
-      /* Shadows */
-      --shadow-card: 0 3px 30px rgba(0,0,0,0.22);
-      --shadow-float: 0 8px 40px rgba(0,0,0,0.12);
-
-      /* Radii */
+      /* Radii — Instagram uses generous rounding */
       --r-sm: 8px;
       --r-md: 12px;
       --r-lg: 18px;
-      --r-pill: 980px;
+      --r-xl: 24px;
+      --r-pill: 999px;
 
-      /* Type scale (Apple HIG derived) */
-      --fs-hero: clamp(36px, 7vw, 56px);
-      --fs-section: clamp(28px, 5vw, 40px);
-      --fs-card-title: 28px;
-      --fs-body: 17px;
-      --fs-caption: 14px;
-      --fs-micro: 12px;
+      /* Type — Instagram style: tight, clean, Inter */
+      --fs-story: 12px;
+      --fs-body: 14px;
+      --fs-caption: 12px;
+      --fs-card-title: 16px;
+      --fs-section: 22px;
+      --fs-hero: 32px;
+      --fs-display: 44px;
+
+      /* Spacing — 4px base (IG style) */
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 20px;
+      --sp-6: 24px;
+      --sp-8: 32px;
+      --sp-10: 40px;
     }
 
     /* === RESET === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
       font-size: var(--fs-body);
-      line-height: 1.47;
-      letter-spacing: -0.374px;
-      color: var(--text-primary);
-      background: var(--light-bg);
+      color: var(--ig-text);
+      background: var(--ig-bg);
       -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+      padding-bottom: 64px; /* space for bottom nav */
       overflow-x: hidden;
     }
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-    /* === NAVIGATION (Apple glass) === */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      height: 48px;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    /* === TOP BAR (Instagram header) === */
+    .topbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--ig-border);
+      padding: var(--sp-3) var(--sp-4);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px;
     }
-    .nav__brand {
-      font-size: 17px; font-weight: 600; color: var(--white);
-      letter-spacing: -0.374px; display: flex; align-items: center; gap: 6px;
+    .topbar__brand {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+      display: flex; align-items: center; gap: var(--sp-1);
     }
-    .nav__brand span { color: var(--gold); }
-    .nav__links { display: flex; gap: 32px; }
-    .nav__links a {
-      font-size: 12px; color: var(--text-on-dark-secondary);
-      transition: color .2s;
+    .topbar__brand span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .nav__links a:hover { color: var(--white); }
-    .nav__cta {
-      font-size: 12px; color: var(--near-black);
-      background: var(--gold); padding: 6px 16px; border-radius: var(--r-pill);
-      font-weight: 500; transition: background .2s;
-    }
-    .nav__cta:hover { background: var(--gold-light); }
-
-    @media (max-width: 768px) {
-      .nav__links { display: none; }
-    }
-
-    /* === HERO (Dark, cinematic) === */
-    .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center;
-      background: var(--dark-bg); color: var(--white);
-      padding: 80px 24px 48px;
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.08) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .hero__eyebrow {
-      font-size: var(--fs-caption); color: var(--gold);
-      text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
-      margin-bottom: 16px;
-    }
-    .hero__title {
-      font-size: var(--fs-hero); font-weight: 600;
-      line-height: 1.07; letter-spacing: -0.28px;
-      max-width: 720px; margin-bottom: 16px;
-    }
-    .hero__title span { color: var(--gold); }
-    .hero__subtitle {
-      font-size: 21px; font-weight: 300; line-height: 1.4;
-      color: var(--text-on-dark-secondary);
-      max-width: 580px; margin-bottom: 32px;
-    }
-    .hero__actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-
-    /* === BUTTONS (Apple pill + gold brand) === */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
-      padding: 12px 28px; border-radius: var(--r-pill);
-      transition: all .25s ease; cursor: pointer; border: none;
-      min-height: 44px;
-    }
-    .btn--gold { background: var(--gold); color: var(--near-black); font-weight: 500; }
-    .btn--gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn--ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
-    .btn--ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
-    .btn--dark { background: var(--near-black); color: var(--white); }
-    .btn--dark:hover { background: #333; }
-    .btn--link {
-      background: transparent; color: var(--link); font-size: var(--fs-caption);
-      padding: 8px 0; border-radius: 0; min-height: auto;
-    }
-    .btn--link:hover { text-decoration: underline; }
-
-    /* === SECTIONS (Alternating dark/light — Apple cinematic rhythm) === */
-    .section { padding: 100px 24px; }
-    .section--dark { background: var(--dark-bg); color: var(--white); }
-    .section--light { background: var(--light-bg); }
-    .section--white { background: var(--white); }
-    .section__header { text-align: center; max-width: 680px; margin: 0 auto 64px; }
-    .section__title {
-      font-size: var(--fs-section); font-weight: 600;
-      line-height: 1.1; letter-spacing: -0.2px; margin-bottom: 12px;
-    }
-    .section--dark .section__title { color: var(--white); }
-    .section__subtitle {
-      font-size: 19px; font-weight: 300; line-height: 1.4;
-      color: var(--text-secondary);
-    }
-    .section--dark .section__subtitle { color: var(--text-on-dark-secondary); }
-
-    /* === SERVICE CARDS (Apple product tile inspired) === */
-    .cards-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; max-width: 1024px; margin: 0 auto;
-    }
-    @media (max-width: 834px) { .cards-grid { grid-template-columns: 1fr; max-width: 480px; } }
-
-    .card {
-      background: var(--white); border-radius: var(--r-md);
-      overflow: hidden; transition: transform .3s ease, box-shadow .3s ease;
-      display: flex; flex-direction: column;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
-    .card__image {
-      height: 200px; background: var(--light-bg);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 56px;
-    }
-    .card__body { padding: 28px 24px 24px; }
-    .card__title {
-      font-size: 21px; font-weight: 600; letter-spacing: 0.231px;
-      margin-bottom: 8px; color: var(--near-black);
-    }
-    .card__desc {
-      font-size: var(--fs-caption); color: var(--text-secondary);
-      line-height: 1.43; margin-bottom: 16px;
-    }
-    .card__price {
-      font-size: var(--fs-body); font-weight: 600; color: var(--gold-dark);
-      margin-bottom: 16px;
-    }
-    .card__price small { font-weight: 400; font-size: var(--fs-caption); color: var(--text-tertiary); }
-
-    /* === STATS (Dark section) === */
-    .stats { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
-    .stat { text-align: center; }
-    .stat__num { font-size: 48px; font-weight: 600; color: var(--gold); line-height: 1.1; letter-spacing: -0.28px; }
-    .stat__label { font-size: var(--fs-caption); color: var(--text-on-dark-secondary); margin-top: 8px; }
-
-    /* === FEATURES (Split rows) === */
-    .feature-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center; max-width: 980px; margin: 0 auto;
-    }
-    @media (max-width: 834px) { .feature-row { grid-template-columns: 1fr; gap: 32px; text-align: center; } }
-    .feature-row + .feature-row { margin-top: 80px; }
-    .feature-row--reverse .feature-row__text { order: 2; }
-    @media (max-width: 834px) { .feature-row--reverse .feature-row__text { order: 0; } }
-    .feature-row__icon { font-size: 48px; margin-bottom: 16px; }
-    .feature-row__title { font-size: 28px; font-weight: 600; margin-bottom: 12px; line-height: 1.14; }
-    .feature-row__desc { font-size: 17px; color: var(--text-secondary); line-height: 1.47; margin-bottom: 16px; }
-    .section--dark .feature-row__desc { color: var(--text-on-dark-secondary); }
-    .feature-row__visual {
-      height: 280px; border-radius: var(--r-md);
-      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.02));
-      display: flex; align-items: center; justify-content: center; font-size: 100px;
-    }
-
-    /* === TESTIMONIALS === */
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; max-width: 1024px; margin: 0 auto;
-    }
-    @media (max-width: 834px) { .testimonials-grid { grid-template-columns: 1fr; } }
-    .testimonial {
-      background: var(--white); border-radius: var(--r-md); padding: 32px 24px;
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .testimonial__stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; }
-    .testimonial__text { font-size: 17px; line-height: 1.47; color: var(--text-primary); }
-    .testimonial__author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
-    .testimonial__avatar {
+    .topbar__actions { display: flex; gap: var(--sp-4); align-items: center; }
+    .topbar__icon {
       width: 40px; height: 40px; border-radius: 50%;
-      background: var(--gold); display: flex; align-items: center; justify-content: center;
-      font-weight: 600; color: var(--near-black); font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: background .2s;
     }
-    .testimonial__name { font-size: var(--fs-caption); font-weight: 600; color: var(--near-black); }
-    .testimonial__role { font-size: var(--fs-micro); color: var(--text-tertiary); }
+    .topbar__icon:hover { background: rgba(0,0,0,0.04); }
+    .topbar__cta {
+      background: var(--ig-blue); color: white;
+      font-size: var(--fs-body); font-weight: 600;
+      padding: 8px 20px; border-radius: var(--r-pill);
+      transition: background .2s;
+    }
+    .topbar__cta:hover { background: var(--ig-blue-hover); }
 
-    /* === BOOKING FORM === */
-    .booking-form {
-      max-width: 560px; margin: 0 auto;
-      background: var(--white); border-radius: var(--r-lg); padding: 40px 32px;
-      box-shadow: var(--shadow-card);
+    /* === PROFILE HEADER (Instagram profile style) === */
+    .profile {
+      max-width: 935px; margin: 0 auto;
+      padding: var(--sp-8) var(--sp-4) var(--sp-6);
+      display: flex; gap: var(--sp-10); align-items: center;
     }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: var(--fs-caption); font-weight: 600; margin-bottom: 6px; color: var(--near-black); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 14px 16px; font-size: var(--fs-body);
-      border: 1.5px solid rgba(0,0,0,0.08); border-radius: var(--r-sm);
-      font-family: inherit; color: var(--text-primary); background: var(--white);
-      transition: border-color .2s;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
-    }
-    .form-group textarea { resize: vertical; min-height: 80px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .profile { flex-direction: column; text-align: center; gap: var(--sp-4); } }
 
-    /* === FOOTER === */
-    .footer { background: var(--dark-bg); color: var(--text-on-dark-secondary); padding: 64px 24px 32px; }
-    .footer__inner { max-width: 980px; margin: 0 auto; }
-    .footer__top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;
+    .profile__avatar {
+      position: relative; flex-shrink: 0;
+      width: 150px; height: 150px;
     }
-    @media (max-width: 768px) { .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; } }
-    .footer__brand { font-size: 24px; font-weight: 600; color: var(--white); margin-bottom: 12px; }
-    .footer__brand span { color: var(--gold); }
-    .footer__tagline { font-size: var(--fs-caption); line-height: 1.43; max-width: 280px; }
-    .footer__col h4 { font-size: var(--fs-caption); font-weight: 600; color: var(--white); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-    .footer__col a { display: block; font-size: var(--fs-caption); padding: 4px 0; transition: color .2s; }
-    .footer__col a:hover { color: var(--gold); }
-    .footer__bottom {
-      border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
-      text-align: center; font-size: var(--fs-micro);
+    .profile__avatar-ring {
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      padding: 4px;
+    }
+    .profile__avatar-img {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--ig-bg);
+      border: 4px solid var(--ig-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px; position: relative; z-index: 1;
+    }
+    @media (max-width: 768px) { .profile__avatar { width: 96px; height: 96px; } .profile__avatar-img { font-size: 36px; } }
+
+    .profile__info { flex: 1; }
+    .profile__name-row {
+      display: flex; align-items: center; gap: var(--sp-4);
+      margin-bottom: var(--sp-4); flex-wrap: wrap;
+    }
+    @media (max-width: 768px) { .profile__name-row { justify-content: center; } }
+    .profile__name { font-size: 24px; font-weight: 300; }
+    .profile__verified {
+      width: 18px; height: 18px; background: var(--ig-blue);
+      border-radius: 50%; color: white; font-size: 11px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .profile__btn {
+      font-size: var(--fs-body); font-weight: 600;
+      padding: 7px 24px; border-radius: var(--r-pill);
+      transition: all .2s;
+    }
+    .profile__btn--primary { background: var(--ig-blue); color: white; }
+    .profile__btn--primary:hover { background: var(--ig-blue-hover); }
+    .profile__btn--secondary { background: var(--ig-bg); border: 1px solid var(--ig-border); color: var(--ig-text); }
+    .profile__btn--secondary:hover { background: rgba(0,0,0,0.04); }
+
+    .profile__stats {
+      display: flex; gap: var(--sp-8); margin-bottom: var(--sp-4);
+    }
+    @media (max-width: 768px) { .profile__stats { justify-content: center; } }
+    .stat-item { font-size: var(--fs-body); }
+    .stat-item strong { font-weight: 600; }
+    .stat-item span { color: var(--ig-text-secondary); }
+
+    .profile__bio { font-size: var(--fs-body); line-height: 1.5; max-width: 420px; }
+    @media (max-width: 768px) { .profile__bio { text-align: center; } }
+    .profile__bio strong { font-weight: 600; }
+    .profile__bio a { color: var(--ig-blue); font-weight: 500; }
+    .profile__tagline { color: var(--ig-text-secondary); margin-top: 2px; }
+
+    /* === STORY CIRCLES (Services as stories) === */
+    .stories {
+      max-width: 935px; margin: 0 auto;
+      padding: var(--sp-6) var(--sp-4);
+      display: flex; gap: var(--sp-6); overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .stories::-webkit-scrollbar { display: none; }
+    .story {
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .story__ring {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--gold-gradient);
+      padding: 3px;
+      transition: transform .2s;
+    }
+    .story:hover .story__ring { transform: scale(1.05); }
+    .story__inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--ig-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; border: 3px solid var(--ig-bg);
+    }
+    .story__label {
+      font-size: var(--fs-story); color: var(--ig-text);
+      max-width: 72px; text-align: center;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
-    /* === PWA INSTALL PROMPT === */
-    .install-banner {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      padding: 16px 24px; display: none; align-items: center; justify-content: center; gap: 16px;
-      transform: translateY(100%); transition: transform .4s ease;
+    /* === HIGHLIGHTS BAR (Instagram highlights under profile) === */
+    .highlights {
+      max-width: 935px; margin: 0 auto;
+      padding: 0 var(--sp-4) var(--sp-6);
+      display: flex; gap: var(--sp-5); overflow-x: auto;
+      scrollbar-width: none;
+      border-bottom: 1px solid var(--ig-border);
+      padding-bottom: var(--sp-6);
     }
-    .install-banner.show { display: flex; transform: translateY(0); }
-    .install-banner__text { color: var(--white); font-size: var(--fs-caption); }
-    .install-banner__text strong { color: var(--gold); }
-    @media (max-width: 480px) {
-      .install-banner { flex-direction: column; gap: 8px; padding: 12px 16px; }
+    .highlights::-webkit-scrollbar { display: none; }
+    .highlight {
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .highlight__circle {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 1px solid var(--ig-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; transition: border-color .2s;
+    }
+    .highlight:hover .highlight__circle { border-color: var(--gold-3); }
+    .highlight__label {
+      font-size: 11px; color: var(--ig-text);
+      max-width: 64px; text-align: center;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
-    /* === SCROLL ANIMATIONS === */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+    /* === SECTION HEADER (feed label) === */
+    .feed-label {
+      max-width: 935px; margin: var(--sp-6) auto var(--sp-4);
+      padding: 0 var(--sp-4);
+      display: flex; align-items: center; gap: var(--sp-3);
+      font-size: var(--fs-card-title); font-weight: 600;
+    }
+    .feed-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--ig-border);
+    }
+
+    /* === FEED CARDS (Instagram post style) === */
+    .feed {
+      max-width: 630px; margin: 0 auto;
+      padding: 0 var(--sp-4);
+      display: flex; flex-direction: column; gap: var(--sp-8);
+    }
+
+    .post {
+      background: var(--ig-white);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .3s;
+    }
+    .post:hover { box-shadow: var(--shadow-md); }
+
+    .post__header {
+      display: flex; align-items: center; gap: var(--sp-3);
+      padding: var(--sp-3) var(--sp-4);
+    }
+    .post__avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: white; font-weight: 600;
+    }
+    .post__user { flex: 1; }
+    .post__username { font-size: var(--fs-body); font-weight: 600; }
+    .post__meta { font-size: var(--fs-caption); color: var(--ig-text-secondary); }
+    .post__more {
+      font-size: 18px; color: var(--ig-text);
+      padding: var(--sp-1); cursor: pointer;
+    }
+
+    .post__image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #f9d97622, #d4af3711);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px; position: relative; overflow: hidden;
+    }
+    .post__image--square { aspect-ratio: 1; }
+    .post__badge {
+      position: absolute; top: var(--sp-3); right: var(--sp-3);
+      background: rgba(0,0,0,0.6); color: white;
+      font-size: 11px; font-weight: 600; padding: 4px 10px;
+      border-radius: var(--r-pill); backdrop-filter: blur(10px);
+    }
+
+    .post__actions {
+      display: flex; gap: var(--sp-4);
+      padding: var(--sp-3) var(--sp-4) var(--sp-1);
+    }
+    .post__action {
+      font-size: 24px; cursor: pointer;
+      transition: transform .15s;
+    }
+    .post__action:hover { transform: scale(1.15); }
+    .post__action--save { margin-left: auto; }
+    .post__action--liked { animation: pop .3s ease; }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    .post__likes {
+      padding: 0 var(--sp-4);
+      font-size: var(--fs-body); font-weight: 600;
+    }
+    .post__caption {
+      padding: var(--sp-1) var(--sp-4);
+      font-size: var(--fs-body); line-height: 1.5;
+    }
+    .post__caption strong { font-weight: 600; }
+    .post__caption a { color: var(--ig-blue); }
+    .post__tags {
+      padding: var(--sp-1) var(--sp-4);
+      font-size: var(--fs-caption); color: var(--ig-blue);
+    }
+    .post__time {
+      padding: var(--sp-2) var(--sp-4) var(--sp-3);
+      font-size: 10px; color: var(--ig-text-secondary);
+      text-transform: uppercase;
+    }
+
+    /* === GALLERY GRID (Instagram profile grid) === */
+    .gallery {
+      max-width: 935px; margin: 0 auto;
+      padding: var(--sp-6) var(--sp-4);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+    @media (max-width: 768px) { .gallery { gap: 2px; } }
+
+    .gallery__item {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #f9d97622, #d4af3711);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; cursor: pointer; position: relative;
+      transition: opacity .2s;
+    }
+    .gallery__item:hover { opacity: 0.85; }
+    .gallery__overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      gap: var(--sp-4); opacity: 0; transition: opacity .2s;
+      color: white; font-size: var(--fs-body); font-weight: 600;
+    }
+    .gallery__item:hover .gallery__overlay { opacity: 1; }
+    .gallery__overlay span { display: flex; align-items: center; gap: var(--sp-1); }
+
+    /* === BOOKING SECTION (Instagram DM style) === */
+    .booking {
+      max-width: 630px; margin: var(--sp-8) auto;
+      padding: 0 var(--sp-4);
+    }
+    .booking__card {
+      background: var(--ig-white);
+      border: 1px solid var(--ig-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .booking__header {
+      display: flex; align-items: center; gap: var(--sp-3);
+      padding: var(--sp-4);
+      border-bottom: 1px solid var(--ig-border);
+    }
+    .booking__header-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white; font-weight: 600;
+    }
+    .booking__header-title { font-weight: 600; font-size: var(--fs-body); }
+    .booking__header-subtitle { font-size: var(--fs-caption); color: var(--ig-text-secondary); }
+    .booking__status {
+      margin-left: auto;
+      display: flex; align-items: center; gap: var(--sp-1);
+      font-size: var(--fs-caption); color: #1db954; font-weight: 500;
+    }
+    .booking__dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #1db954;
+    }
+
+    .booking__body { padding: var(--sp-6) var(--sp-4); }
+    .booking__intro {
+      text-align: center; margin-bottom: var(--sp-6);
+    }
+    .booking__intro h2 {
+      font-size: var(--fs-section); font-weight: 700;
+      margin-bottom: var(--sp-2);
+    }
+    .booking__intro p {
+      color: var(--ig-text-secondary); font-size: var(--fs-body);
+    }
+
+    .field { margin-bottom: var(--sp-4); }
+    .field label {
+      display: block; font-size: var(--fs-caption);
+      font-weight: 600; color: var(--ig-text-secondary);
+      margin-bottom: var(--sp-1); text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px var(--sp-4);
+      font-size: var(--fs-body); font-family: inherit;
+      background: var(--ig-bg); border: 1.5px solid var(--ig-border);
+      border-radius: var(--r-sm); color: var(--ig-text);
+      transition: border-color .2s, background .2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: var(--ig-blue); background: var(--ig-white);
+    }
+    .field textarea { resize: vertical; min-height: 72px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+    @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+
+    .booking__submit {
+      width: 100%; padding: 14px;
+      background: var(--ig-blue); color: white;
+      font-size: var(--fs-body); font-weight: 600;
+      border-radius: var(--r-sm);
+      transition: background .2s;
+    }
+    .booking__submit:hover { background: var(--ig-blue-hover); }
+
+    .booking__trust {
+      display: flex; justify-content: center; gap: var(--sp-6);
+      padding: var(--sp-4); border-top: 1px solid var(--ig-border);
+      font-size: var(--fs-caption); color: var(--ig-text-secondary);
+    }
+
+    /* === TESTIMONIALS (IG comments style) === */
+    .reviews {
+      max-width: 630px; margin: var(--sp-8) auto;
+      padding: 0 var(--sp-4);
+    }
+    .review {
+      display: flex; gap: var(--sp-3);
+      padding: var(--sp-3) 0;
+      border-bottom: 1px solid var(--ig-border);
+    }
+    .review__avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gold-gradient); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: white; font-weight: 600;
+    }
+    .review__body { flex: 1; }
+    .review__header { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: 2px; }
+    .review__name { font-weight: 600; font-size: var(--fs-body); }
+    .review__stars { color: var(--gold-3); font-size: 11px; }
+    .review__time { font-size: 10px; color: var(--ig-text-secondary); margin-left: auto; }
+    .review__text { font-size: var(--fs-body); color: var(--ig-text); line-height: 1.5; }
+    .review__like {
+      display: flex; align-items: center; gap: var(--sp-1);
+      margin-top: var(--sp-2); font-size: var(--fs-caption);
+      color: var(--ig-text-secondary); cursor: pointer;
+    }
+    .review__like:hover { color: var(--ig-text); }
+
+    /* === BOTTOM NAV (Instagram tab bar — PWA mobile) === */
+    .bottomnav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--ig-border);
+      display: flex; justify-content: space-around; align-items: center;
+      height: 56px;
+      padding: 0 var(--sp-2);
+    }
+    .bottomnav__item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 18px; color: var(--ig-text);
+      transition: transform .15s; cursor: pointer;
+      padding: var(--sp-1) var(--sp-3);
+    }
+    .bottomnav__item:hover { transform: scale(1.1); }
+    .bottomnav__item.active { color: var(--gold-4); }
+    .bottomnav__item--cta {
+      background: var(--gold-gradient);
+      width: 40px; height: 40px; border-radius: 50%;
+      color: white; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* === REVEAL ANIMATION === */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* === MOBILE MENU === */
-    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+    /* === PWA INSTALL PROMPT === */
+    .install-sheet {
+      position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%) translateY(100%);
+      z-index: 999; width: 90%; max-width: 420px;
+      background: var(--ig-white); border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg); padding: var(--sp-6);
+      transition: transform .4s ease;
+    }
+    .install-sheet.show { transform: translateX(-50%) translateY(0); }
+    .install-sheet__icon { font-size: 48px; text-align: center; margin-bottom: var(--sp-3); }
+    .install-sheet__title { text-align: center; font-weight: 700; font-size: var(--fs-section); margin-bottom: var(--sp-2); }
+    .install-sheet__desc { text-align: center; color: var(--ig-text-secondary); font-size: var(--fs-body); margin-bottom: var(--sp-5); }
+    .install-sheet__btn {
+      width: 100%; padding: 12px; border-radius: var(--r-sm);
+      font-weight: 600; font-size: var(--fs-body); transition: all .2s;
+    }
+    .install-sheet__btn--primary { background: var(--ig-blue); color: white; margin-bottom: var(--sp-2); }
+    .install-sheet__btn--primary:hover { background: var(--ig-blue-hover); }
+    .install-sheet__btn--secondary { background: var(--ig-bg); border: 1px solid var(--ig-border); color: var(--ig-text); }
+    .install-sheet__close {
+      position: absolute; top: var(--sp-3); right: var(--sp-3);
+      font-size: 20px; color: var(--ig-text-secondary); cursor: pointer;
+    }
+
+    /* === MOBILE === */
     @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .nav__cta { display: none; }
+      .topbar__cta { display: none; }
+      .feed { max-width: 100%; }
+      .gallery { max-width: 100%; }
     }
-    .mobile-menu {
-      position: fixed; top: 48px; left: 0; right: 0; z-index: 999;
-      background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
-      padding: 24px; display: none; flex-direction: column; gap: 20px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: var(--text-on-dark-secondary); font-size: 17px; }
-    .mobile-menu a:hover { color: var(--white); }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="nav">
-    <a href="#" class="nav__brand">Gold<span>Cleaner</span></a>
-    <ul class="nav__links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#features">Why Us</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="#book">Book Now</a></li>
-    </ul>
-    <a href="#book" class="nav__cta">Get a Quote</a>
-    <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">☰</button>
-  </nav>
-  <div class="mobile-menu">
-    <a href="#services">Services</a>
-    <a href="#features">Why Us</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#book">Book Now</a>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <a href="#" class="topbar__brand">Gold<span>Cleaner</span></a>
+    <div class="topbar__actions">
+      <button class="topbar__icon" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">📅</button>
+      <a href="#book" class="topbar__cta">Book Now</a>
+    </div>
   </div>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <p class="hero__eyebrow">Premium Cleaning Services</p>
-    <h1 class="hero__title">Your space deserves <span>gold-standard</span> cleaning.</h1>
-    <p class="hero__subtitle">Professional residential and commercial cleaning, tailored to your schedule. Booked in seconds, done to perfection.</p>
-    <div class="hero__actions">
-      <a href="#book" class="btn btn--gold">Book Now →</a>
-      <a href="#services" class="btn btn--ghost">Explore Services</a>
+  <!-- PROFILE (Instagram profile header) -->
+  <div class="profile reveal">
+    <div class="profile__avatar">
+      <div class="profile__avatar-ring"></div>
+      <div class="profile__avatar-img">✨</div>
     </div>
-  </section>
+    <div class="profile__info">
+      <div class="profile__name-row">
+        <span class="profile__name">goldcleaner</span>
+        <span class="profile__verified">✓</span>
+        <a href="#book" class="profile__btn profile__btn--primary">Book Now</a>
+        <a href="#services" class="profile__btn profile__btn--secondary">Services</a>
+      </div>
+      <div class="profile__stats">
+        <div class="stat-item"><strong>2,547</strong> <span>homes cleaned</span></div>
+        <div class="stat-item"><strong>1,203</strong> <span>followers</span></div>
+        <div class="stat-item"><strong>89</strong> <span>posts</span></div>
+      </div>
+      <div class="profile__bio">
+        <strong>Gold Cleaner Services</strong> ✨<br>
+        Premium residential & commercial cleaning<br>
+        🏠 Eco-friendly · 🔒 Vetted pros · ⚡ Book in 60 sec<br>
+        <a href="tel:+12678265740">📞 (267) 826-5740</a>
+        <div class="profile__tagline">Philadelphia, PA · Serving the Greater Philly Area</div>
+      </div>
+    </div>
+  </div>
 
-  <!-- SERVICES (Light section) -->
-  <section class="section section--light" id="services">
-    <div class="section__header reveal">
-      <h2 class="section__title">Our Services</h2>
-      <p class="section__subtitle">Comprehensive cleaning solutions for every space and every need.</p>
+  <!-- HIGHLIGHTS -->
+  <div class="highlights reveal">
+    <div class="highlight" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">🏠</div>
+      <div class="highlight__label">Residential</div>
     </div>
-    <div class="cards-grid">
-      <div class="card reveal">
-        <div class="card__image">🏠</div>
-        <div class="card__body">
-          <h3 class="card__title">Residential Cleaning</h3>
-          <p class="card__desc">Complete home cleaning — kitchens, bathrooms, floors, living areas. Regular weekly, bi-weekly, or one-time service.</p>
-          <p class="card__price">From $89<small>/visit</small></p>
-          <a href="#book" class="btn--link" style="color: var(--gold-dark);">Book this service →</a>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="card__image">🏢</div>
-        <div class="card__body">
-          <h3 class="card__title">Commercial Cleaning</h3>
-          <p class="card__desc">Office and commercial space cleaning. Keep your workplace spotless, professional, and welcoming every day.</p>
-          <p class="card__price">From $149<small>/visit</small></p>
-          <a href="#book" class="btn--link" style="color: var(--gold-dark);">Book this service →</a>
-        </div>
-      </div>
-      <div class="card reveal">
-        <div class="card__image">✨</div>
-        <div class="card__body">
-          <h3 class="card__title">Deep Cleaning</h3>
-          <p class="card__desc">Thorough top-to-bottom deep cleaning for move-ins, move-outs, spring cleaning, and special occasions.</p>
-          <p class="card__price">From $199<small>/visit</small></p>
-          <a href="#book" class="btn--link" style="color: var(--gold-dark);">Book this service →</a>
-        </div>
-      </div>
+    <div class="highlight" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">🏢</div>
+      <div class="highlight__label">Commercial</div>
     </div>
-  </section>
+    <div class="highlight" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">✨</div>
+      <div class="highlight__label">Deep Clean</div>
+    </div>
+    <div class="highlight" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">📸</div>
+      <div class="highlight__label">Gallery</div>
+    </div>
+    <div class="highlight" onclick="document.getElementById('reviews').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">⭐</div>
+      <div class="highlight__label">Reviews</div>
+    </div>
+    <div class="highlight" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="highlight__circle">📅</div>
+      <div class="highlight__label">Book Now</div>
+    </div>
+  </div>
 
-  <!-- STATS (Dark section — Apple cinematic rhythm) -->
-  <section class="section section--dark">
-    <div class="stats reveal">
-      <div class="stat">
-        <div class="stat__num">2,500+</div>
-        <div class="stat__label">Homes Cleaned</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">4.9★</div>
-        <div class="stat__label">Average Rating</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">100%</div>
-        <div class="stat__label">Satisfaction Guarantee</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">24/7</div>
-        <div class="stat__label">Customer Support</div>
-      </div>
+  <!-- STORIES (Services as Instagram stories) -->
+  <div class="stories reveal" id="services">
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🏠</div></div>
+      <div class="story__label">Residential</div>
     </div>
-  </section>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🏢</div></div>
+      <div class="story__label">Commercial</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">✨</div></div>
+      <div class="story__label">Deep Clean</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🪟</div></div>
+      <div class="story__label">Windows</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🧹</div></div>
+      <div class="story__label">Move In/Out</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🛁</div></div>
+      <div class="story__label">Bathroom</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">🌿</div></div>
+      <div class="story__label">Eco-Friendly</div>
+    </div>
+    <div class="story" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">
+      <div class="story__ring"><div class="story__inner">⚡</div></div>
+      <div class="story__label">Same Day</div>
+    </div>
+  </div>
 
-  <!-- FEATURES (Light section — split rows) -->
-  <section class="section section--white" id="features">
-    <div class="section__header reveal">
-      <h2 class="section__title">Why Gold Cleaner?</h2>
-      <p class="section__subtitle">We don't just clean — we deliver a premium experience from booking to completion.</p>
+  <!-- FEED LABEL -->
+  <div class="feed-label">Our Work</div>
+
+  <!-- FEED (Instagram post cards) -->
+  <div class="feed">
+    <!-- Post 1 -->
+    <div class="post reveal">
+      <div class="post__header">
+        <div class="post__avatar">G</div>
+        <div class="post__user">
+          <div class="post__username">goldcleaner</div>
+          <div class="post__meta">Residential Cleaning · Philadelphia</div>
+        </div>
+        <div class="post__more">⋯</div>
+      </div>
+      <div class="post__image">
+        🏠
+        <div class="post__badge">Before / After</div>
+      </div>
+      <div class="post__actions">
+        <span class="post__action" onclick="toggleLike(this)">🤍</span>
+        <span class="post__action">💬</span>
+        <span class="post__action">📤</span>
+        <span class="post__action post__action--save">🔖</span>
+      </div>
+      <div class="post__likes">2,847 likes</div>
+      <div class="post__caption">
+        <strong>goldcleaner</strong> Living room transformation! From dusty to dazzling ✨ This Philadelphia home got the full gold-standard treatment. Book yours today <a href="#book">#GoldCleaner</a>
+      </div>
+      <div class="post__tags">#cleaning #philly #residential #beforeafter</div>
+      <div class="post__time">2 hours ago</div>
     </div>
 
-    <div class="feature-row reveal">
-      <div class="feature-row__text">
-        <div class="feature-row__icon">🔒</div>
-        <h3 class="feature-row__title">Vetted & Background-Checked Pros</h3>
-        <p class="feature-row__desc">Every cleaner on our team is fully vetted, background-checked, trained, and insured. Your safety and peace of mind come first.</p>
-        <a href="#book" class="btn--link" style="color: var(--gold-dark);">Learn more →</a>
+    <!-- Post 2 -->
+    <div class="post reveal">
+      <div class="post__header">
+        <div class="post__avatar">G</div>
+        <div class="post__user">
+          <div class="post__username">goldcleaner</div>
+          <div class="post__meta">Deep Cleaning · Office Space</div>
+        </div>
+        <div class="post__more">⋯</div>
       </div>
-      <div class="feature-row__visual">🔒</div>
+      <div class="post__image post__image--square">
+        🏢
+        <div class="post__badge">Deep Clean</div>
+      </div>
+      <div class="post__actions">
+        <span class="post__action" onclick="toggleLike(this)">🤍</span>
+        <span class="post__action">💬</span>
+        <span class="post__action">📤</span>
+        <span class="post__action post__action--save">🔖</span>
+      </div>
+      <div class="post__likes">1,203 likes</div>
+      <div class="post__caption">
+        <strong>goldcleaner</strong> Office deep clean complete! 🏢 When your workspace sparkles, your team shines. Commercial cleaning that makes an impression. <a href="#book">#GoldCleaner</a>
+      </div>
+      <div class="post__tags">#commercial #office #deepclean #philly</div>
+      <div class="post__time">1 day ago</div>
     </div>
 
-    <div class="feature-row feature-row--reverse reveal">
-      <div class="feature-row__text">
-        <div class="feature-row__icon">📅</div>
-        <h3 class="feature-row__title">Book in 60 Seconds</h3>
-        <p class="feature-row__desc">Select your service, pick a date, confirm. That's it. No phone calls, no waiting, no hassle. Manage everything from the app.</p>
-        <a href="#book" class="btn--link" style="color: var(--gold-dark);">Book now →</a>
+    <!-- Post 3 -->
+    <div class="post reveal">
+      <div class="post__header">
+        <div class="post__avatar">G</div>
+        <div class="post__user">
+          <div class="post__username">goldcleaner</div>
+          <div class="post__meta">Eco-Friendly Products</div>
+        </div>
+        <div class="post__more">⋯</div>
       </div>
-      <div class="feature-row__visual">📅</div>
+      <div class="post__image">
+        🌿
+        <div class="post__badge">Eco-Friendly</div>
+      </div>
+      <div class="post__actions">
+        <span class="post__action" onclick="toggleLike(this)">🤍</span>
+        <span class="post__action">💬</span>
+        <span class="post__action">📤</span>
+        <span class="post__action post__action--save">🔖</span>
+      </div>
+      <div class="post__likes">3,412 likes</div>
+      <div class="post__caption">
+        <strong>goldcleaner</strong> Safe for your family, safe for the planet 🌿 Our eco-friendly products deliver a powerful clean with zero harsh chemicals. Your kids and pets will thank you! <a href="#book">#GoldCleaner</a>
+      </div>
+      <div class="post__tags">#ecofriendly #safe #cleaning #green</div>
+      <div class="post__time">3 days ago</div>
     </div>
+  </div>
 
-    <div class="feature-row reveal">
-      <div class="feature-row__text">
-        <div class="feature-row__icon">🌿</div>
-        <h3 class="feature-row__title">Eco-Friendly Products</h3>
-        <p class="feature-row__desc">We use non-toxic, eco-friendly cleaning products that are safe for your family, pets, and the planet. Powerful clean, zero harsh chemicals.</p>
-        <a href="#book" class="btn--link" style="color: var(--gold-dark);">Our products →</a>
+  <!-- GALLERY GRID (Instagram profile grid) -->
+  <div class="feed-label" id="gallery">Gallery</div>
+  <div class="gallery reveal">
+    <div class="gallery__item">
+      🪟
+      <div class="gallery__overlay">
+        <span>❤️ 423</span>
+        <span>💬 18</span>
       </div>
-      <div class="feature-row__visual">🌿</div>
     </div>
-  </section>
+    <div class="gallery__item">
+      🛁
+      <div class="gallery__overlay">
+        <span>❤️ 612</span>
+        <span>💬 29</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🍳
+      <div class="gallery__overlay">
+        <span>❤️ 891</span>
+        <span>💬 42</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🛏️
+      <div class="gallery__overlay">
+        <span>❤️ 534</span>
+        <span>💬 21</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🏠
+      <div class="gallery__overlay">
+        <span>❤️ 1.2K</span>
+        <span>💬 56</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🧹
+      <div class="gallery__overlay">
+        <span>❤️ 367</span>
+        <span>💬 12</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      ✨
+      <div class="gallery__overlay">
+        <span>❤️ 2.1K</span>
+        <span>💬 88</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🪣
+      <div class="gallery__overlay">
+        <span>❤️ 445</span>
+        <span>💬 19</span>
+      </div>
+    </div>
+    <div class="gallery__item">
+      🌿
+      <div class="gallery__overlay">
+        <span>❤️ 783</span>
+        <span>💬 34</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- TESTIMONIALS (Dark section) -->
-  <section class="section section--dark" id="testimonials">
-    <div class="section__header reveal">
-      <h2 class="section__title" style="color: var(--white);">Loved by Thousands</h2>
-      <p class="section__subtitle">Don't just take our word for it — here's what our clients say.</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial reveal" style="background: var(--surface-dark-1);">
-        <div class="testimonial__stars">★★★★★</div>
-        <p class="testimonial__text" style="color: rgba(255,255,255,0.85);">"Gold Cleaner transformed my apartment. The attention to detail was incredible — they got spots I didn't even know existed. Booking was so easy!"</p>
-        <div class="testimonial__author">
-          <div class="testimonial__avatar">S</div>
-          <div>
-            <div class="testimonial__name" style="color: var(--white);">Sarah M.</div>
-            <div class="testimonial__role" style="color: rgba(255,255,255,0.48);">Philadelphia, PA</div>
-          </div>
+  <!-- REVIEWS (Instagram comments style) -->
+  <div class="feed-label" id="reviews">Reviews</div>
+  <div class="reviews reveal">
+    <div class="review">
+      <div class="review__avatar">S</div>
+      <div class="review__body">
+        <div class="review__header">
+          <span class="review__name">sarah_m</span>
+          <span class="review__stars">★★★★★</span>
+          <span class="review__time">2h</span>
         </div>
-      </div>
-      <div class="testimonial reveal" style="background: var(--surface-dark-1);">
-        <div class="testimonial__stars">★★★★★</div>
-        <p class="testimonial__text" style="color: rgba(255,255,255,0.85);">"We use Gold Cleaner for our office every week. Reliable, thorough, and professional. The app makes scheduling effortless. Highly recommend."</p>
-        <div class="testimonial__author">
-          <div class="testimonial__avatar">J</div>
-          <div>
-            <div class="testimonial__name" style="color: var(--white);">James T.</div>
-            <div class="testimonial__role" style="color: rgba(255,255,255,0.48);">Business Owner</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial reveal" style="background: var(--surface-dark-1);">
-        <div class="testimonial__stars">★★★★★</div>
-        <p class="testimonial__text" style="color: rgba(255,255,255,0.85);">"The deep cleaning service was worth every penny. They handled my move-out cleaning and I got my full deposit back. Gold standard indeed!"</p>
-        <div class="testimonial__author">
-          <div class="testimonial__avatar">A</div>
-          <div>
-            <div class="testimonial__name" style="color: var(--white);">Aisha K.</div>
-            <div class="testimonial__role" style="color: rgba(255,255,255,0.48);">Philadelphia, PA</div>
-          </div>
-        </div>
+        <div class="review__text">Gold Cleaner transformed my apartment! The attention to detail was incredible — they got spots I didn't even know existed. Booking was so easy! 🙌</div>
+        <div class="review__like">❤️ 47 likes · Reply</div>
       </div>
     </div>
-  </section>
+    <div class="review">
+      <div class="review__avatar">J</div>
+      <div class="review__body">
+        <div class="review__header">
+          <span class="review__name">james_t</span>
+          <span class="review__stars">★★★★★</span>
+          <span class="review__time">1d</span>
+        </div>
+        <div class="review__text">We use Gold Cleaner for our office every week. Reliable, thorough, and professional. The app makes scheduling effortless. Highly recommend! 💼</div>
+        <div class="review__like">❤️ 31 likes · Reply</div>
+      </div>
+    </div>
+    <div class="review">
+      <div class="review__avatar">A</div>
+      <div class="review__body">
+        <div class="review__header">
+          <span class="review__name">aisha_k</span>
+          <span class="review__stars">★★★★★</span>
+          <span class="review__time">3d</span>
+        </div>
+        <div class="review__text">The deep cleaning service was worth every penny. They handled my move-out cleaning and I got my full deposit back. Gold standard indeed! ✨💰</div>
+        <div class="review__like">❤️ 52 likes · Reply</div>
+      </div>
+    </div>
+    <div class="review">
+      <div class="review__avatar">M</div>
+      <div class="review__body">
+        <div class="review__header">
+          <span class="review__name">mike_d</span>
+          <span class="review__stars">★★★★★</span>
+          <span class="review__time">5d</span>
+        </div>
+        <div class="review__text">Booked same-day service and they showed up on time, fully equipped, and did an amazing job. The eco-friendly products were a big plus for us with a newborn. 🍼</div>
+        <div class="review__like">❤️ 38 likes · Reply</div>
+      </div>
+    </div>
+  </div>
 
-  <!-- BOOKING (Light section) -->
-  <section class="section section--light" id="book">
-    <div class="section__header reveal">
-      <h2 class="section__title">Book Your Cleaning</h2>
-      <p class="section__subtitle">Get a free quote in seconds. No commitment, no obligation.</p>
-    </div>
-    <form class="booking-form reveal" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" placeholder="Jane Doe" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" placeholder="(267) 555-0100" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="jane@example.com" required>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="service">Service Type</label>
-          <select id="service" required>
-            <option value="">Select...</option>
-            <option value="residential">Residential Cleaning — $89+</option>
-            <option value="commercial">Commercial Cleaning — $149+</option>
-            <option value="deep">Deep Cleaning — $199+</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="date">Preferred Date</label>
-          <input type="date" id="date" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="notes">Special Requests</label>
-        <textarea id="notes" placeholder="Tell us about your space and any specific needs..."></textarea>
-      </div>
-      <button type="submit" class="btn btn--gold" style="width: 100%; font-size: 18px; padding: 16px;">Get Free Quote →</button>
-      <p style="text-align: center; font-size: var(--fs-micro); color: var(--text-tertiary); margin-top: 12px;">
-        ⚡ Instant response · 🔒 Your info is safe · ✅ No obligation
-      </p>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__top">
+  <!-- BOOKING (Instagram DM style) -->
+  <div class="booking" id="book">
+    <div class="booking__card reveal">
+      <div class="booking__header">
+        <div class="booking__header-avatar">G</div>
         <div>
-          <div class="footer__brand">Gold<span>Cleaner</span></div>
-          <p class="footer__tagline">Premium residential and commercial cleaning services. Gold-standard clean, every time.</p>
+          <div class="booking__header-title">Gold Cleaner Services</div>
+          <div class="booking__header-subtitle">Typically replies in 1 hour</div>
         </div>
-        <div class="footer__col">
-          <h4>Services</h4>
-          <a href="#services">Residential</a>
-          <a href="#services">Commercial</a>
-          <a href="#services">Deep Cleaning</a>
-        </div>
-        <div class="footer__col">
-          <h4>Company</h4>
-          <a href="#features">Why Us</a>
-          <a href="#testimonials">Reviews</a>
-          <a href="#book">Book Now</a>
-        </div>
-        <div class="footer__col">
-          <h4>Contact</h4>
-          <a href="tel:+12678265740">(267) 826-5740</a>
-          <a href="mailto:hello@goldcleaner.services">hello@goldcleaner.services</a>
-          <a href="#">Philadelphia, PA</a>
+        <div class="booking__status">
+          <div class="booking__dot"></div>
+          Active now
         </div>
       </div>
-      <div class="footer__bottom">
-        © 2026 Gold Cleaner Services. All rights reserved. · <span style="color: var(--gold);">Gold-standard cleaning since 2026</span>
+      <div class="booking__body">
+        <div class="booking__intro">
+          <h2>Book Your Cleaning ✨</h2>
+          <p>Get a free quote in seconds. No commitment, no obligation.</p>
+        </div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="field-row">
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label>Phone</label>
+              <input type="tel" placeholder="(267) 555-0100" required>
+            </div>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="jane@example.com" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Service Type</label>
+              <select required>
+                <option value="">Select...</option>
+                <option value="residential">Residential — $89+</option>
+                <option value="commercial">Commercial — $149+</option>
+                <option value="deep">Deep Cleaning — $199+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Preferred Date</label>
+              <input type="date" required>
+            </div>
+          </div>
+          <div class="field">
+            <label>Special Requests</label>
+            <textarea placeholder="Tell us about your space and any specific needs..."></textarea>
+          </div>
+          <button type="submit" class="booking__submit">Send Message →</button>
+        </form>
+      </div>
+      <div class="booking__trust">
+        <span>⚡ Instant response</span>
+        <span>🔒 Your info is safe</span>
+        <span>✅ No obligation</span>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- PWA INSTALL BANNER -->
-  <div class="install-banner" id="installBanner">
-    <div class="install-banner__text">
-      <strong>Install Gold Cleaner</strong> — Book cleaning faster from your home screen.
-    </div>
-    <button class="btn btn--gold" id="installBtn" style="font-size: 14px; padding: 10px 24px;">Install App</button>
-    <button onclick="document.getElementById('installBanner').classList.remove('show')" style="background: none; border: none; color: rgba(255,255,255,0.48); font-size: 20px; cursor: pointer;">×</button>
+  <!-- BOTTOM NAV (Instagram tab bar) -->
+  <nav class="bottomnav">
+    <a href="#home" class="bottomnav__item active">🏠</a>
+    <a href="#services" class="bottomnav__item">🔍</a>
+    <a href="#book" class="bottomnav__item bottomnav__item--cta">➕</a>
+    <a href="#gallery" class="bottomnav__item">📸</a>
+    <a href="#reviews" class="bottomnav__item">❤️</a>
+  </nav>
+
+  <!-- PWA INSTALL SHEET (Instagram story style) -->
+  <div class="install-sheet" id="installSheet">
+    <button class="install-sheet__close" onclick="document.getElementById('installSheet').classList.remove('show')">×</button>
+    <div class="install-sheet__icon">✨</div>
+    <div class="install-sheet__title">Install Gold Cleaner</div>
+    <div class="install-sheet__desc">Book cleaning faster from your home screen. Works offline, instant access.</div>
+    <button class="install-sheet__btn install-sheet__btn--primary" id="installBtn">Install App</button>
+    <button class="install-sheet__btn install-sheet__btn--secondary" onclick="document.getElementById('installSheet').classList.remove('show')">Not Now</button>
   </div>
 
   <script>
-    // === SCROLL REVEAL ANIMATION ===
-    const observer = new IntersectionObserver((entries) => {
+    // === SCROLL REVEAL ===
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // === LIKE TOGGLE (Instagram heart animation) ===
+    function toggleLike(el) {
+      if (el.textContent === '🤍') {
+        el.textContent = '❤️';
+        el.classList.add('post__action--liked');
+        setTimeout(() => el.classList.remove('post__action--liked'), 300);
+      } else {
+        el.textContent = '🤍';
+      }
+    }
 
     // === SMOOTH SCROLL ===
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); document.querySelector('.mobile-menu').classList.remove('open'); }
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
 
     // === FORM HANDLER ===
     function handleSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const service = document.getElementById('service').value;
-      const date = document.getElementById('date').value;
-      alert(`Thank you, ${name}! We'll confirm your ${service} cleaning for ${date} within 1 hour. ⚡`);
+      alert('✅ Thanks! We\'ll confirm your booking within 1 hour. ⚡');
       e.target.reset();
     }
 
-    // === PWA INSTALL PROMPT ===
+    // === PWA INSTALL ===
     let deferredPrompt = null;
     window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      setTimeout(() => { document.getElementById('installBanner').classList.add('show'); }, 3000);
+      e.preventDefault(); deferredPrompt = e;
+      setTimeout(() => { document.getElementById('installSheet').classList.add('show'); }, 3000);
     });
     document.getElementById('installBtn').addEventListener('click', async () => {
       if (!deferredPrompt) return;
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       deferredPrompt = null;
-      document.getElementById('installBanner').classList.remove('show');
+      document.getElementById('installSheet').classList.remove('show');
     });
 
-    // === SERVICE WORKER REGISTRATION ===
+    // === SERVICE WORKER ===
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed:', err));
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err));
       });
     }
+
+    // === BOTTOM NAV ACTIVE STATE ===
+    const navItems = document.querySelectorAll('.bottomnav__item');
+    const sections = ['home', 'services', 'gallery', 'reviews'];
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) current = id;
+      });
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+      });
+    });
   </script>
 </body>
 </html>
